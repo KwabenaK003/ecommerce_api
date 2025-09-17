@@ -1,7 +1,8 @@
-import uvicorn
+# import uvicorn
 from fastapi import FastAPI, HTTPException, status
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
 from typing import Dict, List
+from product_list import products
 from db import ecommerce_collection
 from bson.objectid import ObjectId
 
@@ -124,6 +125,9 @@ def get_product(product_id: int):
     if product_id not in products_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return products_db[product_id]
+
+
+
 
 @app.post(
     "/register",
